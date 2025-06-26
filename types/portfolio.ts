@@ -1,15 +1,12 @@
-// types/portfolio.ts
-
 export interface PortfolioData {
-  name: string;
-  email: string;
+  name: string; // ✅ Add this
   title: string;
   bio: string;
-  techStack: string[];
+  techStack: string;
   projects: {
-    title: string;
+    name: string;
     description: string;
-    link?: string;
+    link: string;
   }[];
   socials: {
     platform: string;
