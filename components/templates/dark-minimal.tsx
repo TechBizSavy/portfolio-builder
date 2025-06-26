@@ -140,9 +140,9 @@ export function DarkMinimalTemplate({ data }: DarkMinimalTemplateProps) {
       {/* Contact */}
       <section className="px-6 py-20 bg-slate-800/50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">Let's Work Together</h2>
+          <h2 className="text-4xl font-bold mb-8">Lets Work Together</h2>
           <p className="text-xl text-slate-400 mb-12">
-            Ready to bring your ideas to life? Let's connect and create something amazing.
+            Ready to bring your ideas to life? Lets connect and create something amazing.
           </p>
           <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-200">
             <Mail className="w-5 h-5 mr-2" />
