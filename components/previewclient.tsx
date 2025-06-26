@@ -27,20 +27,7 @@ import { DarkMinimalTemplate } from '@/components/templates/dark-minimal';
 import { LightDarkToggleTemplate } from '@/components/templates/light-dark-toggle';
 import { AestheticDarkTemplate } from '@/components/templates/aesthetic-dark';
 
-import { PortfolioData } from '@/types/portfolio';
-
-// Type for the raw data structure that might come from localStorage
-interface RawPortfolioData {
-  [key: string]: any;
-  projects?: Array<{
-    name?: string;
-    title?: string;
-    description: string;
-    link?: string;
-    githubUrl?: string;
-    liveUrl?: string;
-  }>;
-}
+import { PortfolioData, RawPortfolioData } from '@/types/portfolio';
 
 export default function PreviewClient() {
   const params = useParams();
@@ -56,9 +43,15 @@ export default function PreviewClient() {
 
         // Transform the data to match PortfolioData structure
         const transformedData: PortfolioData = {
-          ...parsed,
+          name: parsed.name || '',
+          title: parsed.title || '',
+          bio: parsed.bio || '',
+          techStack: parsed.techStack || '',
+          resumeUrl: parsed.resumeUrl,
+          email: parsed.email,
+          socials: parsed.socials || {},
           projects: Array.isArray(parsed.projects) 
-            ? parsed.projects.map((project) => ({
+            ? parsed.projects.map((project: any) => ({
                 title: project.title || project.name || 'Untitled',
                 description: project.description || '',
                 githubUrl: project.githubUrl || project.link || '',
