@@ -40,6 +40,17 @@ export default function PreviewClient() {
     if (data) {
       try {
         const parsed = JSON.parse(data);
+
+        // 🔧 Transform projects to match expected structure
+        if (Array.isArray(parsed.projects)) {
+          parsed.projects = parsed.projects.map((project: any) => ({
+            title: project.title || project.name || 'Untitled',
+            description: project.description || '',
+            githubUrl: project.githubUrl || project.link || '',
+            liveUrl: project.liveUrl || project.link || '',
+          }));
+        }
+
         setPortfolioData(parsed);
       } catch (err) {
         console.error('Invalid JSON in localStorage');
