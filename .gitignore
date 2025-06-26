@@ -25,16 +25,22 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env
 .env*.local
+.env
 
 # vercel
 .vercel
 
-# bolt
-.bolt/
-
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# prisma
+/prisma/migrations
+
+# bolt
+.bolt/
+/.bolt
+
+# environment example (should not contain real secrets)
+.env.example
