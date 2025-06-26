@@ -12,7 +12,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import {
   ArrowLeft,
@@ -20,7 +20,7 @@ import {
   ExternalLink,
   Eye,
   Code,
-  Share2
+  Share2,
 } from 'lucide-react';
 
 import { DarkMinimalTemplate } from '@/components/templates/dark-minimal';
@@ -29,7 +29,7 @@ import { AestheticDarkTemplate } from '@/components/templates/aesthetic-dark';
 
 import { PortfolioData } from '@/types/portfolio';
 
-export default function previewclient() {
+export default function PreviewClient() {
   const params = useParams();
   const templateId = params.template as string;
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
@@ -38,7 +38,12 @@ export default function previewclient() {
   useEffect(() => {
     const data = localStorage.getItem('portfolioData');
     if (data) {
-      setPortfolioData(JSON.parse(data));
+      try {
+        const parsed = JSON.parse(data);
+        setPortfolioData(parsed);
+      } catch (err) {
+        console.error('Invalid JSON in localStorage');
+      }
     }
   }, []);
 
@@ -63,15 +68,16 @@ export default function previewclient() {
   };
 
   const renderTemplate = () => {
+    if (!portfolioData) return null;
     switch (templateId) {
       case 'dark-minimal':
         return <DarkMinimalTemplate data={portfolioData} />;
       case 'light-dark-toggle':
-        return <LightDarkToggleTemplate data={portfolioData!} />;
+        return <LightDarkToggleTemplate data={portfolioData} />;
       case 'aesthetic-dark':
-        return <AestheticDarkTemplate data={portfolioData!} />;
+        return <AestheticDarkTemplate data={portfolioData} />;
       default:
-        return <DarkMinimalTemplate data={portfolioData!} />;
+        return <DarkMinimalTemplate data={portfolioData} />;
     }
   };
 
@@ -135,7 +141,7 @@ export default function previewclient() {
         </div>
       </div>
 
-      {/* Preview Template */}
+      {/* Preview */}
       <div className="relative">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -175,7 +181,7 @@ export default function previewclient() {
                     <ExternalLink className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
                     <h3 className="text-white font-semibold mb-2">Deploy Anywhere</h3>
                     <p className="text-slate-300 text-sm">
-                      Compatible with Vercel, Netlify, and other hosting platforms
+                      Compatible with Vercel, Netlify, and other platforms
                     </p>
                   </div>
                   <div className="text-center">
